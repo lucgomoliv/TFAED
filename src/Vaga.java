@@ -1,5 +1,5 @@
 
-public class Vaga {
+public class Vaga implements IDado{
     private int idEstacionamento;
     private int idVaga;
 
@@ -41,5 +41,17 @@ public class Vaga {
             " idEstacionamento='" + getIdEstacionamento() + "'" +
             ", idVaga='" + getIdVaga() + "'" +
             "}";
+    }
+
+    @Override
+    public int compareTo(IDado o) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getID() {
+        // TODO Auto-generated method stub
+        return 0;
     }
 }

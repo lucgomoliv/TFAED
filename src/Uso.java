@@ -1,7 +1,7 @@
 import java.util.Date;
 import java.util.Objects;
 
-public class Uso {
+public class Uso implements IDado{
     private Carro carro;
     private Vaga vaga;
     private Date horaEntrada;
@@ -65,5 +65,17 @@ public class Uso {
             ", horaEntrada='" + getHoraEntrada() + "'" +
             ", horaSaida='" + getHoraSaida() + "'" +
             "}";
+    }
+
+    @Override
+    public int compareTo(IDado o) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getID() {
+        // TODO Auto-generated method stub
+        return 0;
     }
 }

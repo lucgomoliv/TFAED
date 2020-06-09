@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Carro {
+public class Carro implements IDado{
     private String placa;
 
     public Carro(String placa) {
@@ -32,4 +32,17 @@ public class Carro {
             " placa='" + getPlaca() + "'" +
             "}";
     }
+
+    @Override
+    public int compareTo(IDado o) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getID() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
 }
