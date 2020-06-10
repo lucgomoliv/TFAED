@@ -61,7 +61,7 @@ public class App {
 
     public static AVLUso lerUso() {
         AVLUso avl = new AVLUso();
-        File dados = new File("dados/dadosUsoParcial.txt");
+        File dados = new File("dados/dadosUso.txt");
         try {
             Scanner sc = new Scanner(dados);
             while (sc.hasNextLine()) {
