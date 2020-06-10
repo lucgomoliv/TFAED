@@ -1,8 +1,15 @@
 public class Estacionamento {
-    Carro[] carros;
-    Vaga[] vagas;
-    Uso[] usos;
-    private int id;
+    public ArvoreAVL carros;
+    public ArvoreAVL vagas;
+    public ArvoreAVL usos;
+    public int id;
+
+    public Estacionamento(int id, ArvoreAVL carros, ArvoreAVL vagas, ArvoreAVL usos){
+        this.id = id;
+        this.carros = carros;
+        this.vagas = vagas;
+        this.usos = usos;
+    }
 
     public void consultar(){
         

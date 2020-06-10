@@ -34,15 +34,13 @@ public class Carro implements IDado{
     }
 
     @Override
-    public int compareTo(IDado o) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getID() {
-        // TODO Auto-generated method stub
-        return 0;
+    public int compareTo(IDado o){
+        Carro veiculo = (Carro) o;
+        int comparacao = this.placa.substring(0, 3).compareTo(veiculo.placa.substring(0,3));
+        if(comparacao == 0){
+            comparacao = this.placa.substring(4).compareTo(veiculo.placa.substring(4));
+        }
+        return comparacao;
     }
 
 }

@@ -69,13 +69,8 @@ public class Uso implements IDado{
 
     @Override
     public int compareTo(IDado o) {
-        // TODO Auto-generated method stub
-        return 0;
+        Uso uso = (Uso) o;
+        return this.carro.compareTo(uso.carro);
     }
 
-    @Override
-    public int getID() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
 }

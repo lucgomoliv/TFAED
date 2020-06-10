@@ -45,13 +45,7 @@ public class Vaga implements IDado{
 
     @Override
     public int compareTo(IDado o) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getID() {
-        // TODO Auto-generated method stub
-        return 0;
+        Vaga vaga = (Vaga) o;
+        return Integer.compare(this.idVaga, vaga.idVaga);
     }
 }

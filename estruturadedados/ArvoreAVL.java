@@ -22,7 +22,7 @@ public class ArvoreAVL {
             if (comparacao > 0){
                 arvore.direita = inserir(arvore.direita, dado);
             }
-            else if (comparacao < 0){
+            else {
                 arvore.esquerda = inserir(arvore.esquerda, dado);
             }
         }
@@ -49,8 +49,30 @@ public class ArvoreAVL {
         }
     }
 
+    private List<IDado> buscarTodos(Elemento arvore, IDado dado, List<IDado> dados) {
+        if (arvore == null)
+            return dados;
+        else {
+            int comparacao = dado.compareTo(arvore.dado);
+            if (comparacao > 0)
+                dados = buscarTodos(arvore.direita, dado, dados);
+            else if (comparacao < 0)
+                dados = buscarTodos(arvore.esquerda, dado, dados);
+            else{
+                dados = buscarTodos(arvore.direita, dado, dados);
+                dados = buscarTodos(arvore.esquerda, dado, dados);
+                dados.add(arvore.dado);
+            }
+            return dados;
+        }
+    }
+
     public IDado buscar(IDado dado) {
         return buscar(this.raiz, dado);
+    }
+
+    public List<IDado> buscarTodos(IDado dado){
+        return buscarTodos(this.raiz, dado, new ArrayList<IDado>());
     }
 
     private int numeroFolhas(Elemento arvore) {
