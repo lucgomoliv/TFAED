@@ -73,4 +73,18 @@ public class Uso implements IDado{
         return this.carro.compareTo(uso.carro);
     }
 
+    public int compareVaga(IDado o){
+        Uso uso = (Uso) o;
+        return this.vaga.compareTo(uso.vaga);
+    }
+
+    public int compareData(IDado o){
+        Uso uso = (Uso) o;
+        int comp = this.horaEntrada.compareTo(uso.horaEntrada);
+        if(comp == 0){
+            comp = this.horaSaida.compareTo(uso.horaSaida);
+        }
+        return comp;
+    }
+
 }

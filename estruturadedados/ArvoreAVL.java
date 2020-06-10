@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class ArvoreAVL {
-    private Elemento raiz;
+    protected Elemento raiz;
 
     public ArvoreAVL() {
         raiz = null;
@@ -158,7 +158,7 @@ public class ArvoreAVL {
         balancear();
     }
 
-    private Elemento balancear(Elemento arvore) {
+    protected Elemento balancear(Elemento arvore) {
         arvore.fb = altura(arvore.direita) - altura(arvore.esquerda);
         if(arvore.fb == 2){
             if(arvore.fb * arvore.direita.fb < 0) arvore.direita = rotacionarDireita(arvore.direita);
@@ -176,7 +176,7 @@ public class ArvoreAVL {
         this.raiz = balancear(this.raiz);
     }
 
-    private int altura(Elemento arvore) {
+    protected int altura(Elemento arvore) {
         if(arvore == null) return 0;
         else return arvore.altura;
     }
@@ -203,7 +203,7 @@ public class ArvoreAVL {
         return arvore;
     }
 
-    private int maior(int a, int b){
+    protected int maior(int a, int b){
         if(a > b) return a;
         else return b;
     }
