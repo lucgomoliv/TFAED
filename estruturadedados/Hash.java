@@ -22,8 +22,6 @@ public class Hash {
         return (Math.abs(d.hashCode()) % TAMHASH);
     }
 
-    
-
     private int colisao(int pos, int tentativa){  //sondagem linear
         return (pos+tentativa)%TAMHASH;
     }

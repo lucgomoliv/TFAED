@@ -59,8 +59,8 @@ public class ArvoreAVL {
             else if (comparacao < 0)
                 dados = buscarTodos(arvore.esquerda, dado, dados);
             else{
-                dados = buscarTodos(arvore.direita, dado, dados);
                 dados = buscarTodos(arvore.esquerda, dado, dados);
+                dados = buscarTodos(arvore.direita, dado, dados);
                 dados.add(arvore.dado);
             }
             return dados;
@@ -207,6 +207,20 @@ public class ArvoreAVL {
         if(a > b) return a;
         else return b;
     }
+
+    private List<IDado> inOrdem(Elemento arvore, List<IDado> dados){
+        if(arvore == null) return dados;
+        else {
+            inOrdem(arvore.esquerda, dados);
+            dados.add(arvore.dado);
+            inOrdem(arvore.direita, dados);
+            return dados;
+        }
+    }
+
+    public List<IDado> inOrdem(){
+        return inOrdem(this.raiz, new ArrayList<IDado>());
+    }  
 
     // Código de impressão de árvores binárias retirado do link:
     // https://stackoverflow.com/a/29704252/13084524

@@ -1,11 +1,14 @@
+import java.util.Objects;
 
-public class Vaga implements IDado{
+public class Vaga implements IDado {
     private int idEstacionamento;
     private int idVaga;
+    private Lista usos;
 
     public Vaga(int idEstacionamento, int idVaga) {
         this.idEstacionamento = idEstacionamento;
         this.idVaga = idVaga;
+        this.usos = new Lista();
     }
 
     public int getIdEstacionamento() {
@@ -24,6 +27,10 @@ public class Vaga implements IDado{
         this.idVaga = idVaga;
     }
 
+    public Lista getUsos(){
+        return this.usos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -32,7 +39,12 @@ public class Vaga implements IDado{
             return false;
         }
         Vaga vaga = (Vaga) o;
-        return idEstacionamento == vaga.idEstacionamento && idVaga == vaga.idVaga;
+        return idVaga == vaga.idVaga;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.idVaga);
     }
 
     @Override

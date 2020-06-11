@@ -47,6 +47,11 @@ public class Uso implements IDado{
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(horaEntrada, horaSaida);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (o == this)
             return true;
@@ -54,7 +59,7 @@ public class Uso implements IDado{
             return false;
         }
         Uso uso = (Uso) o;
-        return Objects.equals(carro, uso.carro) && Objects.equals(vaga, uso.vaga) && Objects.equals(horaEntrada, uso.horaEntrada) && Objects.equals(horaSaida, uso.horaSaida);
+        return Objects.equals(horaEntrada, uso.horaEntrada) && Objects.equals(horaSaida, uso.horaSaida);
     }
 
     @Override
@@ -70,7 +75,8 @@ public class Uso implements IDado{
     @Override
     public int compareTo(IDado o) {
         Uso uso = (Uso) o;
-        return this.carro.compareTo(uso.carro);
+        int comp = this.horaEntrada.compareTo(uso.horaEntrada);
+        return comp;
     }
 
     public int compareVaga(IDado o){

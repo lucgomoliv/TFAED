@@ -2,9 +2,11 @@ import java.util.Objects;
 
 public class Carro implements IDado{
     private String placa;
+    private Lista usos;
 
     public Carro(String placa) {
         this.placa = placa;
+        this.usos = new Lista();
     }
 
     public String getPlaca() {
@@ -14,6 +16,15 @@ public class Carro implements IDado{
     public void setPlaca(String placa) {
         this.placa = placa;
     }
+
+    public Lista getUsos() {
+        return this.usos;
+    }
+/*
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.placa.substring(2));
+    }*/
 
     @Override
     public boolean equals(Object o) {
