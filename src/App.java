@@ -79,7 +79,6 @@ public class App {
         }while(!hash.cheia());
         //System.out.println(hash);
         //System.out.println(hash.colisoes);
-        ArvoreAVL avl = new ArvoreAVL();
         File dados = new File("dados/dadosUso.txt");
         try {
             Scanner sc = new Scanner(dados);
