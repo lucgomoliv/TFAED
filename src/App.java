@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -20,13 +21,13 @@ public class App {
         carros = lerCarros();
         vagas = lerVagas();
         uso = lerUso();
-        System.out.println(LocalDateTime.now());/*
+        System.out.println(LocalDateTime.now());
         consultarVeiculo(new Carro("PUB-7662"));
         System.console().readLine();
         consultarVaga(new Vaga(0, 1719), new SimpleDateFormat("dd/MM/yyyy").parse("12/01/2020"), new SimpleDateFormat("dd/MM/yyyy").parse("14/01/2020"));
         System.console().readLine();
         ordenadoPorData();
-        System.out.println(LocalDateTime.now());*/
+        System.out.println(LocalDateTime.now());
     }
 
     public static ArvoreAVL lerCarros() throws IOException {
@@ -61,13 +62,24 @@ public class App {
             System.out.println("Arquivo não encontrado!");
             e.printStackTrace();
         }
-        System.out.println(hash.colisoes);
+        //System.out.println(hash.colisoes);
         return hash;
     }
 
-    public static HashNova lerUso() throws IOException {
-        Path path = Paths.get("dados/dadosuso.txt");
-        HashNova hash = new HashNova((int)Files.lines(path).count());
+    public static HashNova lerUso() throws IOException, ParseException {
+        /*Path path = Paths.get("dados/dadosuso.txt");
+        HashNova hash = new HashNova((int)Files.lines(path).count());*/
+        HashNova hash = new HashNova(365);
+        Date first = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2020");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(first);
+        do{
+            hash.inserir(new Data(calendar.getTime()));
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+        }while(!hash.cheia());
+        //System.out.println(hash);
+        //System.out.println(hash.colisoes);
+        ArvoreAVL avl = new ArvoreAVL();
         File dados = new File("dados/dadosUso.txt");
         try {
             Scanner sc = new Scanner(dados);
@@ -86,21 +98,20 @@ public class App {
                                     (Vaga) vagas.buscar(new Vaga(0, Integer.parseInt(info[1]))), entrada, saida);
                 ((Carro)carros.buscar(novo.getCarro())).getUsos().adicionarElemento(novo);
                 ((Vaga)vagas.buscar(novo.getVaga())).getUsos().adicionarElemento(novo);
-                hash.inserir(novo);
+                ((Data)hash.buscar(new Data(entrada))).usos.inserir(novo);
             }
             sc.close();
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo não encontrado: ");
             e.printStackTrace();
         }
-        System.out.println(hash.colisoes);
         return hash;
     }
 
     public static void consultarVeiculo(Carro carro) {
         double precoTotal = 0;
         double precoAtual;
-        for (IDado a : carros.buscarTodos(carro)) {
+        for (IDado a : ((Carro)carros.buscar(carro)).getUsos().listarElementos()) {
             System.out.println(a.toString());
             precoAtual = (((Uso) a).getHoraEntrada().getTime() - ((Uso) a).getHoraSaida().getTime()) * 0.0000033 * -1;
             System.out.println(precoAtual);
@@ -116,10 +127,19 @@ public class App {
                     System.out.println(a.toString());
         }
     }
-/*
-    public static void ordenadoPorData() {
-        for (IDado a : uso.buscar(dado)) {
-            System.out.println(a.toString());
-        }
-    }*/
+
+    public static void ordenadoPorData() throws ParseException {
+        Date first = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2020");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(first);
+        int count = 0;
+        do{
+            for (IDado a : ((Data)uso.buscar(new Data(calendar.getTime()))).usos.inOrdem()) {
+                System.out.println(a.toString());
+            }
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+            ++count;
+        }while(count < 365);
+        
+    }
 }

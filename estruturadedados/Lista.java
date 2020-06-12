@@ -12,7 +12,14 @@ public class Lista {
      * @return true ou false
      */
     public boolean adicionarElemento(IDado dado){
-        this.ultimo.proximo = ultimo = new Elemento(dado);
+        Elemento aux = this.primeiro;
+        while(aux.proximo != null && dado.compareTo(aux.proximo.dado) > 0){
+            aux = aux.proximo;
+        }
+        Elemento novo = new Elemento(dado);
+        if(aux == this.ultimo) this.ultimo = novo;
+        novo.proximo = aux.proximo;
+        aux.proximo = novo;
         return true;
     }
 

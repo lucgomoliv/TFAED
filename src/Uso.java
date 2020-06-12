@@ -6,12 +6,16 @@ public class Uso implements IDado{
     private Vaga vaga;
     private Date horaEntrada;
     private Date horaSaida;
+    public long horaEntradaTime;
+    public long horaSaidaTime;
 
     public Uso(Carro carro, Vaga vaga, Date horaEntrada, Date horaSaida) {
         this.carro = carro;
         this.vaga = vaga;
         this.horaEntrada = horaEntrada;
         this.horaSaida = horaSaida;
+        this.horaEntradaTime = horaEntrada.getTime();
+        this.horaSaidaTime = horaSaida.getTime();
     }
 
     public Carro getCarro() {
@@ -75,8 +79,9 @@ public class Uso implements IDado{
     @Override
     public int compareTo(IDado o) {
         Uso uso = (Uso) o;
-        int comp = this.horaEntrada.compareTo(uso.horaEntrada);
-        return comp;
+        long comp = this.horaEntradaTime - uso.horaEntradaTime;
+        if(comp == 0) comp = this.horaSaidaTime - uso.horaSaidaTime;
+        return (int)comp;
     }
 
     public int compareVaga(IDado o){

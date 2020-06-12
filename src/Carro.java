@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Carro implements IDado{
+public class Carro implements IDado {
     private String placa;
     private Lista usos;
 
@@ -20,11 +20,14 @@ public class Carro implements IDado{
     public Lista getUsos() {
         return this.usos;
     }
-/*
+
     @Override
     public int hashCode() {
-        return Objects.hash(this.placa.substring(2));
-    }*/
+        char a = this.placa.charAt(2);
+        int b = Integer.parseInt(this.placa.substring(4));
+        int result = a * b;
+        return result;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -36,19 +39,17 @@ public class Carro implements IDado{
         Carro carro = (Carro) o;
         return Objects.equals(placa, carro.placa);
     }
-    
+
     @Override
     public String toString() {
-        return "{" +
-            " placa='" + getPlaca() + "'" +
-            "}";
+        return "{" + " placa='" + getPlaca() + "'" + "}";
     }
 
     @Override
-    public int compareTo(IDado o){
+    public int compareTo(IDado o) {
         Carro veiculo = (Carro) o;
-        int comparacao = this.placa.substring(0, 3).compareTo(veiculo.placa.substring(0,3));
-        if(comparacao == 0){
+        int comparacao = this.placa.substring(0, 3).compareTo(veiculo.placa.substring(0, 3));
+        if (comparacao == 0) {
             comparacao = this.placa.substring(4).compareTo(veiculo.placa.substring(4));
         }
         return comparacao;

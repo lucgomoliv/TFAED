@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.Random;
 
 public class HashNova {
     private Elemento[] tabela;
@@ -14,11 +13,11 @@ public class HashNova {
     }
 
     public int hash(IDado dado) {
-        return Math.abs(dado.hashCode()%39916801) % tabela.length;
+        return Math.abs(dado.hashCode()) % tabela.length;
     }
 
-    private int colisao(int pos, int tentativa, int h) {
-        return (Math.abs(pos + (tentativa*tentativa*tentativa))) % tabela.length;
+    private int colisao(int pos, int tentativa) {
+        return (pos + tentativa) % tabela.length;
     }
 
     public void inserir(IDado dado) {
@@ -26,10 +25,9 @@ public class HashNova {
             int colisao = 0;
             int posOriginal = hash(dado);
             int pos = posOriginal;
-            Random rnd = new Random();
 
             while (tabela[pos].ehValido()) {
-                pos = colisao(posOriginal, ++colisao, rnd.nextInt());
+                pos = colisao(posOriginal, ++colisao);
                 ++colisoes;
             }
 
@@ -42,10 +40,9 @@ public class HashNova {
         int posOriginal = hash(dado);
         int pos = posOriginal;
         int tentativa = 0;
-        Random rnd = new Random();
 
         while ((this.tabela[pos].getDado() != null) && (!this.tabela[pos].getDado().equals(dado)))
-            pos = colisao(posOriginal, ++tentativa, rnd.nextInt());
+            pos = colisao(posOriginal, ++tentativa);
 
         if (this.tabela[pos].ehValido())
             return this.tabela[pos].getDado();
@@ -65,6 +62,11 @@ public class HashNova {
         }
 
         return aux.toString();
+    }
+
+    public boolean cheia(){
+        if(count == tabela.length) return true;
+        else return false;
     }
 
 }
